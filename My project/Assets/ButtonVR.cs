@@ -8,18 +8,24 @@ public class ButtonVR : MonoBehaviour
     public UnityEvent onPress;
     public UnityEvent onRelease;
     GameObject presser;
+    private Vector3 originalPosition;
     bool isPressed;
     // Start is called before the first frame update
     void Start()
     {
         isPressed = false;
+        originalPosition = button.transform.localPosition;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(!isPressed)
         {
-            button.transform.localPosition = new Vector3(0,0.003f,0);
+            button.transform.localPosition = new Vector3(
+                originalPosition.x, 
+                originalPosition.y - 0.003f,
+                originalPosition.z
+            );
             presser = other.gameObject;
             onPress.Invoke();
             isPressed=true;
@@ -30,7 +36,7 @@ public class ButtonVR : MonoBehaviour
     {
         if(other.gameObject==presser)
         {
-            button.transform.localPosition = new Vector3(0,0.015f,0);
+            button.transform.localPosition = originalPosition;
             onRelease.Invoke();
             isPressed=false;
         }
@@ -44,7 +50,7 @@ public class ButtonVR : MonoBehaviour
     }*/
     public void SpawnText()
     {
-        Debug.Log("SpawnText() method called.");
+        //Debug.Log("SpawnText() method called.");
         GameObject textObject = new GameObject("SpawnedText");
         textObject.transform.localPosition = new Vector3(.796f, 1.0f, 4.18f);
 
