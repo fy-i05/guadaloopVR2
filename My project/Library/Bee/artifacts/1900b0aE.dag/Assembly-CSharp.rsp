@@ -386,6 +386,8 @@
 "Assets/AnimateHandonInput.cs"
 "Assets/ButtonFollowVisual.cs"
 "Assets/ButtonVR.cs"
+"Assets/StationController.cs"
+"Assets/StationTrigger.cs"
 -langversion:9.0
 /deterministic
 /optimize+
