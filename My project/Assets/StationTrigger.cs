@@ -6,25 +6,30 @@ public class StationTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // If the object entering has the "Player" tag, call OnPlayerEnterStation
         if (other.CompareTag("Player"))
         {
-            // Pass the player's Collider to the StationController
-            stationController.OnPlayerEnterStation(other);
+            stationController.OnPlayerEnterStation();
+            // Hide warning if it was shown
+            UIManager.Instance.ShowWarningPanel(false);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        // If the object exiting has the "Player" tag, check if station is complete
         if (other.CompareTag("Player"))
         {
-            // Check if station is complete
             if (stationController.CanPlayerLeave())
             {
+                // If allowed, call OnPlayerExitStation
                 stationController.OnPlayerExitStation();
             }
             else
             {
-                Debug.Log("Station is not complete yet! The wall should still block exit.");
+                // Station not complete => show red overlay
+                Debug.Log("Station not complete yet! Showing warning.");
+                UIManager.Instance.ShowWarningPanel(true);
             }
         }
     }
