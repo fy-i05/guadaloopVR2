@@ -1,45 +1,34 @@
 using UnityEngine;
-using System.Collections;
 
 public class StationController : MonoBehaviour
 {
-    [SerializeField] private float requiredStayTime = 5f;  // how long before station is "complete"
     private bool stationCompleted = false;
-    private bool isPlayerInside = false;
-    private float timer = 0f;
 
-    // Called by StationTrigger when player enters
+    // Called by StationTrigger when player enters (optional)
     public void OnPlayerEnterStation()
     {
         Debug.Log("Player entered station area.");
-        isPlayerInside = true;
-        timer = 0f;  // reset timer
     }
 
-    // Called by StationTrigger if the station allows them to leave
+    // Called by StationTrigger when the station allows them to leave (optional)
     public void OnPlayerExitStation()
     {
         Debug.Log("Player left station area.");
-        isPlayerInside = false;
     }
 
-    // StationTrigger calls this to see if the player can leave without a warning
+    // The ButtonPressCounter script will call this once the user has pressed enough times
+    public void MarkStationComplete()
+    {
+        if (!stationCompleted)
+        {
+            stationCompleted = true;
+            Debug.Log("Station tasks complete! Player can now leave freely.");
+        }
+    }
+
+    // StationTrigger calls this to see if the user can exit the station without warning
     public bool CanPlayerLeave()
     {
         return stationCompleted;
-    }
-
-    private void Update()
-    {
-        // If player is inside and not completed, count time
-        if (isPlayerInside && !stationCompleted)
-        {
-            timer += Time.deltaTime;
-            if (timer >= requiredStayTime)
-            {
-                stationCompleted = true;
-                Debug.Log("Station tasks complete! Player can now leave freely.");
-            }
-        }
     }
 }

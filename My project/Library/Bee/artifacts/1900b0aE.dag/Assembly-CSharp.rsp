@@ -385,6 +385,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/AnimateHandonInput.cs"
 "Assets/ButtonFollowVisual.cs"
+"Assets/ButtonPressCounter.cs"
 "Assets/ButtonVR.cs"
 "Assets/Oculus Hands/Materials/UIManager.cs"
 "Assets/StationController.cs"
